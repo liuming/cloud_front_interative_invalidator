@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = CloudFrontInterativeInvalidator::VERSION
   spec.authors       = ["Ming Liu"]
   spec.email         = ["liuming@Lmws.net"]
-  spec.summary       = %q{Cloud Front Interative Invalidator}
+  spec.summary       = %q{Create and show CloudFront invalidations in interactive command}
   spec.description   = spec.summary
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/liuming/cloud_front_interative_invalidator"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

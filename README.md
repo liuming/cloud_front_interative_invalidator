@@ -1,6 +1,6 @@
 # CloudFrontInterativeInvalidator
 
-TODO: Write a gem description
+Create and show CloudFront invalidations in interactive command
 
 ## Installation
 
@@ -18,7 +18,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Set environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`
+
+Run `cfii`
 
 ## Contributing
 
