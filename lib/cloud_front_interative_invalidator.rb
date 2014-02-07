@@ -23,7 +23,9 @@ module CloudFrontInterativeInvalidator
     tp distributions
 
     puts "Input the number of the distribution:"
-    distribution_index = gets.to_i - 1
+    distribution_input = gets.chomp
+    return unless distribution_input.match(/^[0-9]+$/)
+    distribution_index = distribution_input.to_i - 1
     distribution_id = distributions[distribution_index][:id]
     show_distribution(distribution_id) if distribution_id
   end
