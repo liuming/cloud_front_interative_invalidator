@@ -3,15 +3,25 @@ require 'table_print'
 
 require_relative "cloud_front_interative_invalidator/version"
 
-tp.set :max_width, 100
-
-AWS.config({
-  :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-  :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'],
-})
-
 module CloudFrontInterativeInvalidator
   def self.start(params={})
+    tp.set :max_width, 100
+
+    if ENV['AWS_ACCESS_KEY_ID'].nil?
+      puts "Input AWS access key id:"
+      ENV['AWS_ACCESS_KEY_ID'] = gets.chomp
+    end
+
+    if ENV['AWS_SECRET_ACCESS_KEY'].nil?
+      puts "Input AWS secret access key:"
+      ENV['AWS_SECRET_ACCESS_KEY'] = gets.chomp
+    end
+
+    AWS.config({
+      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'],
+    })
+
     list_distributions
   end
 
@@ -22,10 +32,12 @@ module CloudFrontInterativeInvalidator
     end
     tp distributions
 
-    puts "Input the number of the distribution:"
-    distribution_input = gets.chomp
-    return unless distribution_input.match(/^[0-9]+$/)
-    distribution_index = distribution_input.to_i - 1
+    begin
+      puts "Input the number of the distribution (or anything else to quit):"
+      distribution_input = gets.chomp
+      return unless distribution_input.match(/^[0-9]+$/)
+      distribution_index = distribution_input.to_i - 1
+    end until distribution_index < distributions.size && distribution_index > 0
     distribution_id = distributions[distribution_index][:id]
     show_distribution(distribution_id) if distribution_id
   end
